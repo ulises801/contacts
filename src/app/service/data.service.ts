@@ -11,21 +11,20 @@ export class DataService {
 
   constructor(private firestore: Firestore) { }
 
-  // agregar un contacto a la coleccion
-
+  // Agrega contacto
   createContact(contact: any){
     const document = doc(collection(this.firestore, 'contacts'));
     return setDoc(document, contact);
   }
 
-  // traer todos los contactos almacenados en la conleccion
+  // Consulta de todos los contactos
   getContacts(): Observable<any []> {
     const contactsCollection = collection(this.firestore, 'contacts');
     return collectionData(contactsCollection, {idField: 'id'})
     .pipe(map(contacts => contacts as any[]));
   }
 
-  // trae un contacto en especifico
+  // Consulta contacto especifico
   getContactById(id: String): Observable<any>{
     const document = doc(this.firestore, `contacts/${id}`)
     return docSnapshots(document)
@@ -36,14 +35,14 @@ export class DataService {
     }));
   }
 
-  // editar un contacto en especifico
+  // Edita contacto en especifico
   editContact(contact:any){
     const document = doc(this.firestore, 'contacts', contact?.id);
     const { id, ...data} = contact;
     return setDoc(document, data);
   }
 
-  // eliminar o remover un contacto en especifico
+  // Elimina contacto en especifico
   removeContact(id: string){
     const document = doc(this.firestore, 'contacts', id);
     return deleteDoc(document);
