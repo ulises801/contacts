@@ -1,8 +1,8 @@
 {
-  "name": "Contacts",
+  "name": "example",
   "integrations": {
     "capacitor": {}
   },
   "type": "angular",
-  "id": "dacc750c"
+  "id": "4f818905"
 }
